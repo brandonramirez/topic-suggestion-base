@@ -1,0 +1,25 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Topics</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Votes</td>
+                </tr>
+            </thead>
+            <tbody>
+                <% topics.forEach(function (topic) { %>
+                    <tr>
+                        <td><%= topic.name %></td>
+                        <td><%= topic.votes || 0 %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </body>
+</html>
