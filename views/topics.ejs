@@ -12,7 +12,7 @@
                     <td>Votes</td>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="topics">
                 <% topics.forEach(function (topic) { %>
                     <tr>
                         <td><%= topic.name %></td>
@@ -21,5 +21,18 @@
                 <% }) %>
             </tbody>
         </table>
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+        <script>
+          var topics = document.getElementById('topics');
+
+          var socket = io();  // by default, connect to document origin.
+          socket.on('topic', function (topic) {
+            console.log('got topic');
+            var row = document.createElement('tr');
+            row.innerHTML = '<td>' + topic.name + '</td><td>0</td>';''
+            topics.appendChild(row);
+          });
+          socket.emit('from client');
+        </script>
     </body>
 </html>

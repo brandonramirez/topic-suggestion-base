@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var topic = mongoose.model('Topic');
+var realTimeFeed = require('../../real-time-feed');
 
 router.get('/topics', function (req, res) {
     //res.send('Getting topics...');
@@ -34,6 +35,7 @@ router.get('/topics', function (req, res) {
 router.post('/topics', function (req, res) {
    topic.create(req.body).then(function (results) {
        res.send(results);
+       realTimeFeed.send(results);
    }, function (error) {
        console.warn('Topic create failed: %0', error);
        res.status(400);
